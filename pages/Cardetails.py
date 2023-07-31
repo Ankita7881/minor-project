@@ -24,6 +24,20 @@ if st.sidebar.checkbox("Show Car's Datasets"):
     st.subheader('📅 Raw datasets')
     st.dataframe(df) 
 
-st.subheader('Car Details')
-fig1 = px.bar(df, 'Brand Name ', 'Fuel Type ')
+st.subheader('VALUE COUNT OF MODEL NAME')
+models = df['Model Name '].value_counts()
+fig2 = px.funnel(models, models.index, models.values)
+st.plotly_chart(fig2, use_container_width=True)
+
+st.subheader('ANALYSIS ON PRICE AND MODEL NAME')
+fig1 = px.area(df, 'Model Name ', 'On road Price ')
 st.plotly_chart(fig1, use_container_width=True)
+
+st.subheader('ANALYSIS ON PRICE AND MODEL NAME')
+fig2 = px.bar(df, 'CAR ID',['On road Price ','Ex Showroom Price '],hover_name='Model Name ', barmode='group')
+st.plotly_chart(fig2, use_container_width=True)
+
+st.subheader('Analysis on fuel type vehicle')
+vehicle_fuel=df['Fuel Type '].value_counts()
+chart1 = px.pie(vehicle_fuel,vehicle_fuel.index,vehicle_fuel.values)
+st.plotly_chart(chart1, use_container_width=True)

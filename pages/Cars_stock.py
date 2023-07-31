@@ -32,3 +32,12 @@ st.subheader('datacount of month')
 models = df['Month '].value_counts()
 fig2 = px.funnel(models, models.index, models.values)
 st.plotly_chart(fig2, use_container_width=True)
+
+total_vehicle=df['Total Vehicle Retail '].sum()
+st.metric('Total Number of Vehicles Retail:', f"{total_vehicle}",)
+
+st.subheader('No.of vehicles retail in a month')
+
+result_df =df.groupby('Month ')['Total Vehicle Wholesale '].sum().reset_index()
+fig1 = px.bar(result_df, 'Month ','Total Vehicle Wholesale ')
+st.plotly_chart(fig1, use_container_width=True)
